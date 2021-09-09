@@ -124,7 +124,7 @@ resource "aws_eip_association" "hashicat" {
 }
 
 resource "aws_instance" "hashicat" {
-  ami                         = "ami-0691a793b97f3ad6e"
+  ami                         = "ami-06db8d0bbdaf077e3"
   instance_type               = var.instance_type
   key_name                    = aws_key_pair.hashicat.key_name
   associate_public_ip_address = true
