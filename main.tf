@@ -96,22 +96,22 @@ resource "aws_route_table_association" "hashicat" {
   route_table_id = aws_route_table.hashicat.id
 }
 
-#data "aws_ami" "ubuntu" {
- # most_recent = true
+data "aws_ami" "ubuntu" {
+  most_recent = true
 
-  #filter {
-   # name = "name"
-    #values = ["ubuntu/images/hvm-ssd/ubuntu-disco-19.04-amd64-server-*"]
-    #values = ["ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*"]
- #}
+  filter {
+    name = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-disco-19.04-amd64-server-*"]
+    values = ["ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*"]
+ }
 
-  #filter {
-   # name   = "virtualization-type"
-    #values = ["hvm"]
-  #}
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
 
-  #owners = ["099720109477"] # Canonical
-#}
+  owners = ["099720109477"] # Canonical
+}
 
 resource "aws_eip" "hashicat" {
   instance = aws_instance.hashicat.id
@@ -124,7 +124,7 @@ resource "aws_eip_association" "hashicat" {
 }
 
 resource "aws_instance" "hashicat" {
-  ami                         = "ami-06db8d0bbdaf077e3"
+  ami                         = data.aws_ami.ubuntu.id
   instance_type               = var.instance_type
   key_name                    = aws_key_pair.hashicat.key_name
   associate_public_ip_address = true
