@@ -12,7 +12,7 @@ variable "prefix" {
 
 variable "region" {
   description = "The region where the resources are created."
-  default     = "ap-south-1"
+  default     = "ap-southeast-1"
 }
 
 variable "address_space" {
